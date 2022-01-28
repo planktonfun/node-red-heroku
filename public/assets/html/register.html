@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    
+    <title>Preclinic - Medical & Hospital</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+    <div class="main-wrapper  account-wrapper">
+        <div class="account-page">
+            <div class="account-center">
+                <div class="account-box">
+                    <form action="#" onsubmit="addEmployee(event)" class="form-signin">
+						<div class="account-logo">
+                            <img src="assets/img/logo-dark.png" alt="">
+                        </div>
+                        <div class="form-group">
+                            <label>RFID</label>
+                            <input id="rfid" type="text" autocomplete="off" class="form-control" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>NFC</label>
+                            <input id="nfc" type="text" autocomplete="off" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input id="first" type="text" autocomplete="off" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input id="last" type="text" autocomplete="off" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input id="mobile" type="text" autocomplete="off" class="form-control" required>
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary account-btn" type="submit">Register</button>
+                        </div>
+                        <div class="text-center login-link">
+                            Already have an account? <a href="login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        function addEmployee(event) {
+            event.preventDefault();
+
+            let rfid = $('#rfid').val();
+            let nfc = $('#nfc').val();
+            let first = $('#first').val();
+            let last = $('#last').val();
+            let mobile = $('#mobile').val();
+
+            $.post('/add-employee', {
+                rfid,
+                nfc,
+                first,
+                last,
+                mobile,
+                timestamp: Date.now()
+            }, (res)=>{
+                if(res.success) {
+                    location.href = '/login';
+                } else {
+                    alert('something went wrong, please try again')
+                }
+            }, "json");
+        }
+    </script>
+</body>
+
+</html>
