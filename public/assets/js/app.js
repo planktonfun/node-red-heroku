@@ -287,7 +287,7 @@ window.onload = () => {
 }
 
 function checkNotification() {
-    $.get('http://localhost:1880/check-notifications', function(res) {
+    $.get('/check-notifications', function(res) {
         if(res.count > 0) {
             $('#notifications-count').html(res.count);
             $('#notifications-count').show();
